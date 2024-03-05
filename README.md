@@ -1,18 +1,18 @@
 OOP Structure:
-Person Class
-  Name
-  Birthdate
+Person Class,
+  Name,
+  Birthdate,
   IdNumber
 
-Employee : Person
-  Supervisor 
-  HourlySalary
-  Title
+Employee : Person,
+  Supervisor,
+  HourlySalary,
+  Title,
     CalculateYearlySalary() 
     
-Professor : Employee
+Professor : Employee,
   Subject 
 
-Student : Person 
-  EnrollmentDate
+Student : Person, 
+  EnrollmentDate,
     CalculateRemainingMonths()
