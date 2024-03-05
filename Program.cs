@@ -60,15 +60,30 @@ public class Student : Person
         EnrollmentDate = enrollmentDate;
     }
 
-    public int CalculateRemainingSemesters()
+    public int CalculateRemainingMonths()
     {
         //assume a regular study time of 6 semesters 
+        // Get today's and enroll date and extract year and month
         DateTime currentDate = DateTime.Today;
-        int remainingSemesters = 6 - ((currentDate.Year - EnrollmentDate.Year) * 2);
-        if (currentDate.Month < 7)
-            remainingSemesters--;
+        int currentYear = currentDate.Year;
+        int currentMonth = currentDate.Month;
+        int enrollYear = EnrollmentDate.Year;
+        int enrollMonth = EnrollmentDate.Month;
+        int monthsPassed;
 
-        return remainingSemesters;
+        if (enrollMonth == 9)
+        {
+            monthsPassed = (12 - enrollMonth) + (((currentYear - enrollYear) - 1) * 12) + currentMonth;
+
+        } else
+        {
+            monthsPassed = ((currentYear - enrollYear)*12) + currentMonth;
+        }
+
+        int remainingMonths = 36 - monthsPassed + 1;
+
+        //current month is included as the month has not been completed yet
+        return remainingMonths;
     }
 }
 
@@ -88,7 +103,7 @@ class Program
         Console.WriteLine($"Employee {employee.Name} has a yearly salary of {employee.CalculateYearlySalary()}.");
         Console.WriteLine($"Professor {professor.Name} has a yearly salary of {professor.CalculateYearlySalary()}.");
         Console.WriteLine($"Professor {professor.Name} teaches {professor.Subject}.");
-        Console.WriteLine($"Student {student1.Name} has {student1.CalculateRemainingSemesters()} remaining semesters.");
-        Console.WriteLine($"Student {student2.Name} has {student2.CalculateRemainingSemesters()} remaining semesters.");
+        Console.WriteLine($"Student {student1.Name} has {student1.CalculateRemainingMonths()} months remaining.");
+        Console.WriteLine($"Student {student2.Name} has {student2.CalculateRemainingMonths()} months remaining.");
     }
 }
