@@ -71,18 +71,30 @@ public class Student : Person
         int enrollMonth = EnrollmentDate.Month;
         int monthsPassed;
 
+        //if enrolled in September 
         if (enrollMonth == 9)
         {
-            monthsPassed = (12 - enrollMonth) + (((currentYear - enrollYear) - 1) * 12) + currentMonth;
+            /*  monthsPassed is 
+             *  13 minus 9 is 4 months studied the first semester
+             *  current year (2024 minus enrollment year - 1 bc the enrollment year months have already been calculated (4)). Times 12 to get months. 
+             *  plus amount of months completed this year
+            */
+            monthsPassed = (13 - enrollMonth) + ((currentYear - (enrollYear + 1)) * 12) + currentMonth;
 
-        } else
+        } 
+        //if enrolled in January
+        else 
         {
+            /* monthsPassed is
+             * current year minus enroll year times 12 (how many years have elapsed)
+             * plus amount of months completed this year
+            */
             monthsPassed = ((currentYear - enrollYear)*12) + currentMonth;
         }
 
+        //the full 3 years (36 months), minus months passed plus 1 (current month counted as full month)
         int remainingMonths = 36 - monthsPassed + 1;
-
-        //current month is included as the month has not been completed yet
+        
         return remainingMonths;
     }
 }
@@ -103,7 +115,9 @@ class Program
         Console.WriteLine($"Employee {employee.Name} has a yearly salary of {employee.CalculateYearlySalary()}.");
         Console.WriteLine($"Professor {professor.Name} has a yearly salary of {professor.CalculateYearlySalary()}.");
         Console.WriteLine($"Professor {professor.Name} teaches {professor.Subject}.");
+        //should return 18 months remaining 
         Console.WriteLine($"Student {student1.Name} has {student1.CalculateRemainingMonths()} months remaining.");
+        //should return 22 months remaining
         Console.WriteLine($"Student {student2.Name} has {student2.CalculateRemainingMonths()} months remaining.");
     }
 }
